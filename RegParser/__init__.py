@@ -25,21 +25,22 @@ class RegParser( object ):
     def process( self, data ):
         i = 0
         j = 0
+        
         for line in split_no_empty( data, "\n" ):
-            try:
+            m = re.match( self.d[i], line )
+            
+            j += 1
+            
+            if m == None:
+                i += 1
+                j = 0
+                
                 m = re.match( self.d[i], line )
-                j += 1
                 if m == None:
-                    i += 1
-                    j = 0
-                    if re.match( self.d[i], line ) == None:
-                        return
-                    
-                else:
-                    for key, value in m.groupdict().iteritems():
-                        self.ret[ i ][ j ][ key ] = value
-            except:
-                return
+                    continue
+                
+            for key, value in m.groupdict().iteritems():
+                self.ret[ i ][ j ][ key ] = value
         
     def get_json( self ):
         return json.dumps( self.ret, sort_keys = True, indent = 4, separators = ( ',', ': ' ) )
