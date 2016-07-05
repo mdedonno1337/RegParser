@@ -42,8 +42,8 @@ class RegParser( object ):
                 return
         
     def get_json( self ):
-        return json.dumps( self.ret, sort_keys = False, indent = 4, separators = ( ',', ': ' ) )
+        return json.dumps( self.ret, sort_keys = True, indent = 4, separators = ( ',', ': ' ) )
     
     def get_dict( self ):
-        return json.loads( self.get_json() )
+        return self.ret
     
