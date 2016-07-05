@@ -18,7 +18,7 @@ class RegParser( object ):
         
     def load( self, reg ):
         for exp in split_no_empty( reg, '\n' ):
-            exp = re.sub( '\s+', '\s+', exp )
+            exp = re.sub( '\s+', '[\s\t]+', exp )
             exp = re.compile( exp )
             self.d.append( exp )
     
